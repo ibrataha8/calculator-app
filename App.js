@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 
@@ -13,7 +12,9 @@ export default function App() {
 
     } else if (val == "=") {
       try {
-const result = eval(val)
+        const result = eval(total)
+        setTotal(String(result))
+
       } catch (error) {
         setTotal(error)
       }
@@ -22,7 +23,7 @@ const result = eval(val)
   }
   return (
     <SafeAreaView style={styles.main}>
-      <TextInput style={styles.screen} value={total}></TextInput>
+      <TextInput showSoftInputOnFocus={false} editable={false} style={styles.screen} value={total}></TextInput>
       <View style={styles.button_row}>
         <TouchableOpacity style={styles.yellow_button}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("C")}>C</Text>
@@ -91,14 +92,14 @@ const result = eval(val)
         </TouchableOpacity>
       </View>
 
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: 'lightblue',
+    backgroundColor: 'black',
     justifyContent: 'flex-end',
     alignItems: 'center',
     paddingBottom: 20,
