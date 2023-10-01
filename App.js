@@ -1,16 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
+import { useState, useEffect } from 'react';
+import { StyleSheet, Keyboard, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
+  let operations = ["+", "-", "*", "/"];
+  let cuurentNumber
+  let perviouseChar
   const [total, setTotal] = useState("")
+  const handleKeyPress = (e) => {
+    alert(`Touche pressée : ${e.key}`);
+  };
   const handlePressBtn = (val) => {
     if (val == "C") {
       setTotal("")
     }
     else if (val == "AC") {
-      setTotal("")
-
+      newTotal = (total.slice(0, -1))
+      setTotal(newTotal)
     } else if (val == "=") {
       try {
         const result = eval(total)
@@ -26,13 +32,15 @@ export default function App() {
   }
   return (
     <SafeAreaView style={styles.main}>
-      <TextInput onChangeText={(text) => setTotal(text)} style={styles.screen} value={total}></TextInput>
+      <TextInput editable={false} style={styles.screen} value={total}></TextInput>
       <View style={styles.button_row}>
         <TouchableOpacity style={styles.yellow_button} onPress={() => handlePressBtn("C")}>
           <Text style={styles.button_text} >C</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.back_text} onPress={() => handlePressBtn("AC")}>
-          <Text style={styles.button_text} ><FontAwesomeIcon icon="fa-solid fa-delete-left" /> <Icon name="trash" size={30} color="red" /></Text>
+          <Text style={styles.button_text} >
+            <Icon name="trash" size={30} color="red" />
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.operator_button} onPress={() => setTotal("/")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("/")}>/</Text>
