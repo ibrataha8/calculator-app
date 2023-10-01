@@ -4,12 +4,7 @@ import { StyleSheet, Keyboard, Text, View, SafeAreaView, TextInput, TouchableOpa
 import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
   let operations = ["+", "-", "*", "/"];
-  let cuurentNumber
-  let perviouseChar
   const [total, setTotal] = useState("")
-  const handleKeyPress = (e) => {
-    alert(`Touche pressée : ${e.key}`);
-  };
   const handlePressBtn = (val) => {
     if (val == "C") {
       setTotal("")
@@ -26,20 +21,17 @@ export default function App() {
         setTotal(error)
       }
     }
-    // else if (val == "+") {
-    //   setTotal(total + "+")
-    // }
   }
   return (
     <SafeAreaView style={styles.main}>
       <TextInput editable={false} style={styles.screen} value={total}></TextInput>
       <View style={styles.button_row}>
         <TouchableOpacity style={styles.yellow_button} onPress={() => handlePressBtn("C")}>
-          <Text style={styles.button_text} >C</Text>
+          <Text style={styles.button_text_remove} >C</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.back_text} onPress={() => handlePressBtn("AC")}>
+        <TouchableOpacity style={styles.yellow_button} onPress={() => handlePressBtn("AC")}>
           <Text style={styles.button_text} >
-            <Icon name="trash" size={30} color="red" />
+            <Text style={styles.button_text_remove} >AC</Text>
           </Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.operator_button} onPress={() => setTotal("/")}>
@@ -95,7 +87,7 @@ export default function App() {
         <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + ".")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn(".")}>.</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "7")}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "0")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("0")}>0</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.back_btn} onPress={() => handlePressBtn("=")}>
@@ -134,7 +126,8 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 60,
-    backgroundColor: 'pink',
+    backgroundColor: 'yellow',
+
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -184,9 +177,13 @@ const styles = StyleSheet.create({
     width: 80,
     height: 80,
     borderRadius: 60,
-    backgroundColor: 'orange',
+    backgroundColor: 'green',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  button_text_remove: {
+    color: 'black',
+    fontSize: 35
 
   }
 });
