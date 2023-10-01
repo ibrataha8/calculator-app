@@ -1,6 +1,7 @@
+import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, SafeAreaView, TextInput, TouchableOpacity } from 'react-native';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 export default function App() {
   const [total, setTotal] = useState("")
   const handlePressBtn = (val) => {
@@ -18,77 +19,79 @@ export default function App() {
       } catch (error) {
         setTotal(error)
       }
-
     }
+    // else if (val == "+") {
+    //   setTotal(total + "+")
+    // }
   }
   return (
     <SafeAreaView style={styles.main}>
-      <TextInput showSoftInputOnFocus={false} editable={false} style={styles.screen} value={total}></TextInput>
+      <TextInput onChangeText={(text) => setTotal(text)} style={styles.screen} value={total}></TextInput>
       <View style={styles.button_row}>
-        <TouchableOpacity style={styles.yellow_button}>
-          <Text style={styles.button_text} onPress={() => handlePressBtn("C")}>C</Text>
+        <TouchableOpacity style={styles.yellow_button} onPress={() => handlePressBtn("C")}>
+          <Text style={styles.button_text} >C</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.back_text}>
-          <Text style={styles.button_text} onPress={() => handlePressBtn("AC")}>AC</Text>
+        <TouchableOpacity style={styles.back_text} onPress={() => handlePressBtn("AC")}>
+          <Text style={styles.button_text} ><FontAwesomeIcon icon="fa-solid fa-delete-left" /> <Icon name="trash" size={30} color="red" /></Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.operator_button}>
+        <TouchableOpacity style={styles.operator_button} onPress={() => setTotal("/")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("/")}>/</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.button_row}>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "7")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("7")}>7</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "8")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("9")}>8</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "9")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("9")}>9</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.operator_button}>
+        <TouchableOpacity style={styles.operator_button} onPress={() => setTotal(total + "*")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("*")}>*</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.button_row}>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "4")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("4")}>4</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "5")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("5")}>5</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "6")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("6")}>6</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.operator_button}>
+        <TouchableOpacity style={styles.operator_button} onPress={() => setTotal(total + "+")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("+")}>+</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.button_row}>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "1")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("1")}>1</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "2")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("2")}>2</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "3")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("3")}>3</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.operator_button}>
+        <TouchableOpacity style={styles.operator_button} onPress={() => setTotal(total + "-")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("-")}>-</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.button_row}>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + ".")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn(".")}>.</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.number_button}>
+        <TouchableOpacity style={styles.number_button} onPress={() => setTotal(total + "7")}>
           <Text style={styles.button_text} onPress={() => handlePressBtn("0")}>0</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.back_btn}>
-          <Text style={styles.button_text} onPress={() => handlePressBtn("=")}>=</Text>
+        <TouchableOpacity style={styles.back_btn} onPress={() => handlePressBtn("=")}>
+          <Text style={styles.button_text} >=</Text>
         </TouchableOpacity>
       </View>
 
